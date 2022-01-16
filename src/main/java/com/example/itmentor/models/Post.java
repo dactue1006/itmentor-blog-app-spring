@@ -24,6 +24,7 @@ public class Post implements Serializable {
     private String title;
 
     @NotBlank
+    @Column(length = 1000)
     private String content;
 
     @Column(unique = true)
@@ -38,6 +39,14 @@ public class Post implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     @LastModifiedDate
     private Date updatedAt;
+
+    public Post() {
+    }
+    public Post(@NotBlank String title, @NotBlank String content, String slug) {
+        this.title = title;
+        this.content = content;
+        this.slug = slug;
+    }
 
     public Long getId() {
         return id;
