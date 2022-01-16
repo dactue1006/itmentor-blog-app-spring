@@ -1,11 +1,13 @@
 package com.example.itmentor.controllers;
 
+import com.example.itmentor.dto.ApiResponse;
 import com.example.itmentor.dto.PostRequestDTO;
 import com.example.itmentor.exceptions.ResourceNotFoundException;
 import com.example.itmentor.models.Post;
 import com.example.itmentor.repositories.PostRepository;
 import com.example.itmentor.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -40,6 +42,17 @@ public class PostController {
     }
 
     // Update a Post
+    @PutMapping("/posts/{id}")
+    public Post updatePost(@PathVariable(value = "id") Long postId,
+                           @Valid @RequestBody PostRequestDTO postRequestDTO) {
+        return postService.updatePost(postId, postRequestDTO);
+    }
 
     // Delete a Post
+    @DeleteMapping("/posts/{id}")
+    public ResponseEntity<?> deletePost(@PathVariable(value = "id") Long postId) {
+        postService.deletePost(postId);
+
+        return ResponseEntity.ok().body(new ApiResponse(true, "Delete post successfully!"));
+    }
 }

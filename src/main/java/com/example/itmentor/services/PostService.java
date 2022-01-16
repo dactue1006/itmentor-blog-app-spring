@@ -11,4 +11,8 @@ public interface PostService {
     Post createPost(PostRequestDTO postRequestDTO);
 
     Post getPostBySlug(String slug);
+
+    Post updatePost(Long postId, PostRequestDTO postRequestDTO);
+
+    void deletePost(Long postId);
 }

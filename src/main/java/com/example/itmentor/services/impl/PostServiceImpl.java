@@ -41,4 +41,22 @@ public class PostServiceImpl implements PostService {
     public Post getPostBySlug(String slug) {
         return postRepository.findBySlug(slug).orElseThrow(() -> new ResourceNotFoundException("Post", "slug", slug));
     }
+
+    @Override
+    public Post updatePost(Long postId, PostRequestDTO postRequestDTO) {
+        Post post = postRepository.findById(postId).orElseThrow(() -> new ResourceNotFoundException("Post", "id", postId));
+
+        // update title and content from post request
+        post.setTitle(postRequestDTO.getTitle());
+        post.setContent(postRequestDTO.getContent());
+
+        return postRepository.save(post);
+    }
+
+    @Override
+    public void deletePost(Long postId) {
+        Post post = postRepository.findById(postId).orElseThrow(() -> new ResourceNotFoundException("Post", "id", postId));
+
+        postRepository.delete(post);
+    }
 }
