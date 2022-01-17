@@ -8,7 +8,6 @@ public class PostRequestDTO {
     private String title;
 
     @NotBlank
-    @Size(max = 1000)
     private String content;
 
     public PostRequestDTO(String title, String content) {

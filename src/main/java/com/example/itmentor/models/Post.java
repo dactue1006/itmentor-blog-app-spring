@@ -1,6 +1,7 @@
 package com.example.itmentor.models;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -24,7 +25,7 @@ public class Post implements Serializable {
     private String title;
 
     @NotBlank
-    @Column(length = 1000)
+    @Lob
     private String content;
 
     @Column(unique = true)
